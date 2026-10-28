@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Checks Royal Mint from outside its server. Run by GitHub Actions every 10 minutes.
+Checks Royall Mint from outside its server. Run by GitHub Actions every 10 minutes.
 
 A check fails only after three attempts 20 seconds apart. While the site is down, one GitHub issue
 labelled `outage` stays open (GitHub notifies the repo owner when it opens); an email goes out through
@@ -106,9 +106,9 @@ def main():
         if open_issues:
             github("POST", f"/issues/{open_issues[0]['number']}/comments", {"body": f"Still down at {now}:\n{text}\n\n{run}"})
         else:
-            github("POST", "/issues", {"title": f"Royal Mint is down ({now})", "labels": [LABEL],
+            github("POST", "/issues", {"title": f"Royall Mint is down ({now})", "labels": [LABEL],
                                        "body": f"Seen from GitHub Actions at {now}:\n{text}\n\n{site}\n{run}"})
-            email("Royal Mint is down", f"Checked from outside the server at {now}:\n{text}\n\n{site}\n{run}")
+            email("Royall Mint is down", f"Checked from outside the server at {now}:\n{text}\n\n{site}\n{run}")
         sys.exit(1)
 
     print("UP")
@@ -116,7 +116,7 @@ def main():
         number = open_issues[0]["number"]
         github("POST", f"/issues/{number}/comments", {"body": f"Back up at {now}.\n\n{run}"})
         github("PATCH", f"/issues/{number}", {"state": "closed", "state_reason": "completed"})
-        email("Royal Mint is back up", f"The site answered normally at {now}.\n\n{site}")
+        email("Royall Mint is back up", f"The site answered normally at {now}.\n\n{site}")
 
 
 if __name__ == "__main__":
